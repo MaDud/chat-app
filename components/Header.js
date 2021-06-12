@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-        position: "fixed",
+        position: "absolute",
         top: 0,
         height: 125,
         width: "100%"

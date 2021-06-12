@@ -62,7 +62,7 @@ const styles = StyleSheet.create( {
         borderRadius: 50
     },
     newMessageBox: {
-        position: "fixed",
+        position: "absolute",
         bottom: 0,
         backgroundColor: "#B6DEFD",
         display: "flex",
