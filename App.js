@@ -9,6 +9,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { StyleSheet, View } from 'react-native';
 import UsersRooms from './components/UsersRooms';
+import ChatRoom from './components/ChatRoom';
 
 const token1 = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2MjQ1Mzg4NTQsImlhdCI6MTYyMjExOTY1NCwiaXNzIjoiY2hhdGx5IiwianRpIjoiZTBlODM3NDgtODkxZS00ZmQyLWFmNjUtYmE5MjlhYmUzOWUwIiwibmJmIjoxNjIyMTE5NjUzLCJzdWIiOiI0ODU2ODVmMS1mNGQxLTQzOWYtYWE3MC0zYjg1ZWI4NjZmZTkiLCJ0eXAiOiJhY2Nlc3MifQ.JQy40M5jYX0ZRuEeItXUsHrHwEyJHXzSXdGi1hV6HHax9FJB9D2FjqX3fBzteUkLApFtHOcGVwUADpFp-tbUfw"
 
@@ -36,7 +37,8 @@ export default function App() {
     <ApolloProvider client={client}>
       <View style={styles.container}>
         <StatusBar style="auto" />
-        <UsersRooms />
+        {/* <UsersRooms /> */}
+        <ChatRoom />
       </View>
     </ApolloProvider>
   );
