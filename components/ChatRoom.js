@@ -85,7 +85,8 @@ const styles = StyleSheet.create( {
     chatTitle: {
         color: '#5603AD',
         fontWeight: 'bold',
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: 'Poppins_400Regular'
     },
     newMessageBox: {
         position: "fixed",
@@ -109,7 +110,8 @@ const styles = StyleSheet.create( {
         borderBottomLeftRadius: 12,
         marginLeft: 16,
         padding: 12,
-        fontSize: 14
+        fontSize: 14,
+        fontFamily: 'Poppins_400Regular'
     },
     chatBox: {
         display: "flex",
