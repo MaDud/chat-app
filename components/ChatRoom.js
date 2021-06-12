@@ -3,16 +3,29 @@ import { StyleSheet, Pressable, View, TextInput, Image, Text } from 'react-nativ
 import {GET_CHAT_DATA} from '../index';
 import {useQuery} from '@apollo/client';
 import Header from './Header';
+import MessageBox from './MessageBox';
 
 const ChatRoom = () => {
     const {loading, data} = useQuery(GET_CHAT_DATA, {
-        variables: {id: "93d14fbd-dfc7-410b-b063-052c89fdd24f"}
+        variables: {id: "5a7a2352-c9e5-46ec-ba3c-f1e45be0f569"}
     });
     const [text, setText] = useState('hej');
 
     if (loading) {
         return <Text>Loading...</Text>
     } 
+
+    console.log(data.room.messages)
+
+    const conversation = data.room.messages.map( (message, id) => {
+        return (
+            <MessageBox key={message.id} 
+                message={message.body} 
+                userId={data.room.user.id} 
+                messageOwnerId={message.user.id}
+                source={data.room.messages.length === id + 1 ? message.user.profilePic : null}/>
+        )
+    })
 
     return (
         <View>
@@ -25,8 +38,8 @@ const ChatRoom = () => {
                     </View>
                 </View>
             </Header>
-            <View>
-
+            <View style={styles.chatBox}>
+                {conversation}
             </View>
             <View style={styles.newMessageBox}>
                 <TextInput
@@ -34,7 +47,7 @@ const ChatRoom = () => {
                     defaultValue={text}
                     onChangeText={text => setText(text)}
                 />
-                <Pressable>
+                <Pressable onPressIn={()=> console.log(text)}>
                     <Text>send</Text>
                 </Pressable>
             </View>
@@ -43,10 +56,6 @@ const ChatRoom = () => {
 };
 
 const styles = StyleSheet.create( {
-    chatHeader: {
-        display: "flex",
-        flexDirection: "row"
-    },
     chatIcon: {
         width: 44,
         height: 44,
@@ -73,6 +82,14 @@ const styles = StyleSheet.create( {
         borderTopRightRadius: 12,
         borderBottomLeftRadius: 12,
         marginLeft: 16,
+        padding: 12,
+        fontSize: 14
+    },
+    chatBox: {
+        display: "flex",
+        height: "calc(100vh - 68px - 125px) ",
+        justifyContent: "flex-end",
+        marginTop: 125
     }
 })
 

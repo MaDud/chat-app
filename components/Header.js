@@ -27,7 +27,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20
+        borderBottomRightRadius: 20,
+        position: "fixed",
+        top: 0,
+        height: 125,
+        width: "100%"
     },
     buttonsBox: {
         display: 'flex',

@@ -17,9 +17,19 @@ export const GET_CHAT_DATA = gql`
         room(id: $id) {
             name
             roomPic
+            user {
+                id
+            }
             messages {
                 id
                 body
+                insertedAt
+                user {
+                    id
+                    profilePic
+                    firstName
+                    lastName
+                }
             }
     }
 }`
