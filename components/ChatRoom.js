@@ -4,6 +4,8 @@ import {GET_CHAT_DATA} from '../index';
 import {useQuery} from '@apollo/client';
 import Header from './Header';
 import MessageBox from './MessageBox';
+import { Phone, Videocall, Send} from './Svgs';
+import Button from './Button';
 
 const ChatRoom = () => {
     const {loading, data} = useQuery(GET_CHAT_DATA, {
@@ -14,8 +16,6 @@ const ChatRoom = () => {
     if (loading) {
         return <Text>Loading...</Text>
     } 
-
-    console.log(data.room.messages)
 
     const conversation = data.room.messages.map( (message, id) => {
         return (
@@ -31,11 +31,19 @@ const ChatRoom = () => {
         <View>
             <Header>
                 <View style={styles.chatHeader}>
-                    <Image source={require('../assets/favicon.png')} style={styles.chatIcon}/>
-                    <View>
-                        <Text>{data.room.name}</Text>
+                    <Image source={{uri: `${data.room.roomPic}`}} style={styles.chatIcon}/>
+                    <View style={styles.chatInfo}>
+                        <Text style={styles.chatTitle}>{data.room.name}</Text>
                         <Text></Text>
                     </View>
+                </View>
+                <View style={styles.buttonBox}>
+                    <Button title='phone'>
+                        <Phone />
+                    </Button>
+                    <Button title='videocall'>
+                        <Videocall />
+                    </Button>
                 </View>
             </Header>
             <View style={styles.chatBox}>
@@ -47,8 +55,8 @@ const ChatRoom = () => {
                     defaultValue={text}
                     onChangeText={text => setText(text)}
                 />
-                <Pressable onPressIn={()=> console.log(text)}>
-                    <Text>send</Text>
+                <Pressable onPressIn={()=> console.log(text)} style={styles.send}>
+                    <Send />
                 </Pressable>
             </View>
         </View>
@@ -60,6 +68,24 @@ const styles = StyleSheet.create( {
         width: 44,
         height: 44,
         borderRadius: 50
+    },
+    chatHeader: {
+        display: 'flex',
+        flexDirection: 'row',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    chatInfo: {
+        marginRight: 8,
+        marginLeft: 8,
+        flex: 1,
+        alignSelf: 'flex-start'
+    },
+    chatTitle: {
+        color: '#5603AD',
+        fontWeight: 'bold',
+        fontSize: 16
     },
     newMessageBox: {
         position: "fixed",
@@ -90,6 +116,14 @@ const styles = StyleSheet.create( {
         height: "calc(100vh - 68px - 125px) ",
         justifyContent: "flex-end",
         marginTop: 137
+    },
+    buttonBox: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+    send: {
+        marginRight: 16,
+        marginLeft: 17
     }
 })
 

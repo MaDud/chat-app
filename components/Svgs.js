@@ -1,5 +1,5 @@
 import * as React from "react"
-import Svg, { Circle, Path } from "react-native-svg"
+import Svg, { Circle, Path, Mask, G } from "react-native-svg"
 
 export const Search = (props) => {
   return (

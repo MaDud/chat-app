@@ -1,23 +1,13 @@
 import React from 'react';
 import {StyleSheet, View, Pressable, Text} from 'react-native';
-import {Search} from './Svgs';
-
 
 const Header = ({children}) => {
+
+    // const svgBtn = svgs.map( svg => <Pressable style={styles.iconBtn}>{svg}</Pressable>);
+
     return (
         <View style={styles.headerBgColor}>
-            <View>
-                {children}
-            </View>
-            <View style={styles.buttonsBox}>
-               <Pressable style={styles.iconBtn}>
-                    <Text>search</Text>
-                    <Search />
-               </Pressable>
-               <Pressable style={styles.iconBtn}>
-                    <Text>users</Text>
-               </Pressable>
-            </View>
+            {children}
         </View>
     )
 }
@@ -25,31 +15,35 @@ const Header = ({children}) => {
 const styles = StyleSheet.create({
     headerBgColor: {
         backgroundColor: "#B6DEFD",
-        paddingTop: 60,
+        paddingTop: 65,
+        paddingLeft: 16,
+        paddingRight: 8,
+        paddingBottom: 16,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
+        alignItems: 'center',
+        borderBottomLeftRadius: 24,
+        borderBottomRightRadius: 24,
         position: "fixed",
         top: 0,
-        height: 125,
+        height: 120,
         width: "100%"
-    },
-    buttonsBox: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    iconBtn: {
-        // width: 44,
-        padding: 10,
-        borderRadius: 50,
-        backgroundColor: "#fff"
-    },
-    icon: {
-        width: 100
     }
+    // buttonsBox: {
+    //     display: 'flex',
+    //     flexDirection: 'row',
+    //     justifyContent: 'space-between'
+    // },
+    // iconBtn: {
+    //     // width: 44,
+    //     padding: 10,
+    //     borderRadius: 50,
+    //     backgroundColor: "#fff"
+    // },
+    // icon: {
+    //     width: 100
+    // }
 })
 
 export default Header;
