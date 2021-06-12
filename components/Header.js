@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Pressable, Text} from 'react-native';
+import {Search} from './Svgs';
+
 
 const Header = ({children}) => {
     return (
@@ -10,6 +12,7 @@ const Header = ({children}) => {
             <View style={styles.buttonsBox}>
                <Pressable style={styles.iconBtn}>
                     <Text>search</Text>
+                    <Search />
                </Pressable>
                <Pressable style={styles.iconBtn}>
                     <Text>users</Text>
