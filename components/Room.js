@@ -1,16 +1,16 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {StyleSheet, Pressable, Image, Text, View} from 'react-native';
 
-const Room = ({name, source}) => {
+const Room = ({name, source, openChat}) => {
      return (
-         <View style={styles.roomBox}>
+         <Pressable style={styles.roomBox} onPress={openChat}>
             <Image source={source ? {uri: source} : require('../assets/favicon.png')}
                 style={styles.profileImg}
             />
             <View >
                  <Text>{name}</Text>
             </View>
-         </View>
+         </Pressable>
      )
 };
 
@@ -29,7 +29,8 @@ const styles = StyleSheet.create( {
     profileImg: {
         height: 64,
         width: 64,
-        marginRight: 16
+        marginRight: 16,
+        borderRadius: 50
     }
 })
 

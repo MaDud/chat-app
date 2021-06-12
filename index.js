@@ -3,13 +3,6 @@ import {gql} from '@apollo/client';
 export const GET_USERS_ROOMS = gql`
   {
     usersRooms {
-        user {
-            email
-            firstName
-            lastName
-            id
-            role
-        }
         rooms {
           id
           name
@@ -18,3 +11,15 @@ export const GET_USERS_ROOMS = gql`
     }
   }
 `;
+
+export const GET_CHAT_DATA = gql`
+  {
+    room($id: String) {
+        name
+        roomPic
+        messages {
+            id
+            body
+        }
+    }
+}`
