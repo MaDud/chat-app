@@ -8,7 +8,7 @@ const Room = ({name, source, openChat}) => {
                 style={styles.profileImg}
             />
             <View >
-                 <Text>{name}</Text>
+                 <Text style={styles.roomName}>{name}</Text>
             </View>
          </Pressable>
      )
@@ -25,6 +25,9 @@ const styles = StyleSheet.create( {
         paddingBottom: 12,
         paddingLeft: 16,
         marginTop: 12
+    },
+    roomName: {
+        fontFamily: 'Poppins_400Regular',
     },
     profileImg: {
         height: 64,

@@ -8,6 +8,8 @@ import {
 } from "@apollo/client";
 import { setContext } from '@apollo/client/link/context';
 import { StyleSheet, View } from 'react-native';
+import {useFonts, Poppins_400Regular} from '@expo-google-fonts/poppins';
+import AppLoading from 'expo-app-loading';
 import UsersRooms from './components/UsersRooms';
 import ChatRoom from './components/ChatRoom';
 
@@ -33,6 +35,12 @@ const client = new ApolloClient({
 
 
 export default function App() {
+
+  const [fontLoaded] = useFonts({Poppins_400Regular});
+  if (!fontLoaded) { 
+    return <AppLoading /> 
+  }
+
   return (
     <ApolloProvider client={client}>
       <View style={styles.container}>
@@ -48,5 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f0f8ff',
+    fontFamily: 'Poppins_400Regular'
   },
 });

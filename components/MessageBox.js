@@ -29,7 +29,8 @@ const styles = StyleSheet.create( {
         borderTopLeftRadius: 12,
     },
     message: {
-        fontSize: 14
+        fontSize: 14,
+        fontFamily: 'Poppins_400Regular'
     },
     userBox: {
         backgroundColor: "#993AFC",
@@ -47,7 +48,8 @@ const styles = StyleSheet.create( {
         flexDirection: "row",
         alignItems: "center",
         marginBottom: 12,
-        marginLeft: 16
+        marginLeft: 16,
+        color: '#1A1A1A'
     },
     answerMessage: {
         backgroundColor: "#fff",
