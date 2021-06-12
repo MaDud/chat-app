@@ -89,7 +89,7 @@ const styles = StyleSheet.create( {
         fontFamily: 'Poppins_400Regular'
     },
     newMessageBox: {
-        position: "fixed",
+        position: "absolute",
         bottom: 0,
         backgroundColor: "#B6DEFD",
         display: "flex",
@@ -109,15 +109,16 @@ const styles = StyleSheet.create( {
         borderTopRightRadius: 12,
         borderBottomLeftRadius: 12,
         marginLeft: 16,
-        padding: 12,
+        paddingLeft: 12,
         fontSize: 14,
         fontFamily: 'Poppins_400Regular'
     },
     chatBox: {
         display: "flex",
-        height: "calc(100vh - 68px - 125px) ",
-        justifyContent: "flex-end",
-        marginTop: 137
+        height: "100%",
+        paddingBottom: 68,
+        paddingTop: 137,
+        justifyContent: "flex-end"
     },
     buttonBox: {
         display: 'flex',
