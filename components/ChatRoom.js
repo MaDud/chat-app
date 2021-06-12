@@ -89,7 +89,7 @@ const styles = StyleSheet.create( {
         display: "flex",
         height: "calc(100vh - 68px - 125px) ",
         justifyContent: "flex-end",
-        marginTop: 125
+        marginTop: 137
     }
 })
 

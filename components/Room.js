@@ -24,7 +24,7 @@ const styles = StyleSheet.create( {
         paddingRight: 16,
         paddingBottom: 12,
         paddingLeft: 16,
-        marginTop: 20
+        marginTop: 12
     },
     profileImg: {
         height: 64,

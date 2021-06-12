@@ -17,7 +17,7 @@ const UsersRooms = () => {
         const rooms = data.usersRooms.rooms;
 
         innerContent = (
-            <View>
+            <View style={styles.usersRooms}>
                 {rooms.map(room => {
                     return <Room key={room.id} name={room.name} source={room.roomPic}/>
                 })}
@@ -35,5 +35,11 @@ const UsersRooms = () => {
     )
 
 };
+
+const styles = StyleSheet.create( {
+    usersRooms: {
+        marginTop: 137
+    }
+})
 
 export default UsersRooms

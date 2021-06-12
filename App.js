@@ -37,8 +37,8 @@ export default function App() {
     <ApolloProvider client={client}>
       <View style={styles.container}>
         <StatusBar style="auto" />
-        {/* <UsersRooms /> */}
-        <ChatRoom />
+        <UsersRooms />
+        {/* <ChatRoom /> */}
       </View>
     </ApolloProvider>
   );
