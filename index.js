@@ -13,6 +13,7 @@ export const GET_USERS_ROOMS = gql`
         rooms {
           id
           name
+          roomPic
         }
     }
   }
