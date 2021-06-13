@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         borderBottomRightRadius: 24,
         position: "absolute",
         top: 0,
-        height: 120,
+        height: 125,
         width: "100%"
     }
 })

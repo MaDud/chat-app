@@ -6,8 +6,6 @@ import {GET_USERS_ROOMS} from '../index';
 import {useQuery} from '@apollo/client';
 import Button from './Button';
 import { Search, Rooms } from './Svgs';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 const UsersRooms = ({navigation}) => {
 
