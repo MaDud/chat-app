@@ -11,8 +11,10 @@ const ChatRoom = () => {
     const {loading, data} = useQuery(GET_CHAT_DATA, {
         variables: {id: "93d14fbd-dfc7-410b-b063-052c89fdd24f"}
     });
-    const [text, setText] = useState('hej');
-    const [addMessage] = useMutation(ADD_MESSAGE)
+    const [text, setText] = useState('');
+    const [addMessage] = useMutation(ADD_MESSAGE, {
+        refetchQueries: [ {query: GET_CHAT_DATA, variables: {id: "93d14fbd-dfc7-410b-b063-052c89fdd24f"}}]
+    })
 
     if (loading) {
         return <Text>Loading...</Text>
@@ -30,7 +32,6 @@ const ChatRoom = () => {
 
     const sendMessage = () => {
         addMessage( { variables: { roomId: "93d14fbd-dfc7-410b-b063-052c89fdd24f", body: text}});
-        console.log('send');
         setText('');
     }
 
