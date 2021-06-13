@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import { StyleSheet, Pressable, View, TextInput, Image, Text, ScrollView} from 'react-native';
 import {GET_CHAT_DATA, ADD_MESSAGE} from '../index';
 import {useQuery, useMutation} from '@apollo/client';
@@ -9,6 +9,7 @@ import Button from './Button';
 
 const ChatRoom = ({route}) => {
     const { roomId } = route.params;
+    const scrollViewRef = useRef();
     const {loading, data} = useQuery(GET_CHAT_DATA, {
         variables: {id: roomId}
     });
@@ -56,7 +57,8 @@ const ChatRoom = ({route}) => {
                 </View>
             </Header>
             <View style={styles.chatBox}>
-                <ScrollView>
+                <ScrollView ref={scrollViewRef}
+                        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
                     {conversation}
                 </ScrollView>
             </View>
@@ -66,7 +68,7 @@ const ChatRoom = ({route}) => {
                     defaultValue={text}
                     onChangeText={text => setText(text)}
                 />
-                <Pressable onPressIn={()=> sendMessage()}>
+                <Pressable onPressIn={()=> sendMessage()} style={styles.send}>
                     <Send />
                 </Pressable>
             </View>
@@ -127,7 +129,7 @@ const styles = StyleSheet.create( {
     chatBox: {
         display: "flex",
         height: "100%",
-        paddingBottom: 68,
+        paddingBottom: 80,
         paddingTop: 137,
         justifyContent: "flex-end"
     },
