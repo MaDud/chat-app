@@ -22,18 +22,20 @@ const ChatRoom = ({route}) => {
         return <Text>Loading...</Text>
     } 
 
-    const conversation = data.room.messages.map( (message, id) => {
-        return (
-            <MessageBox key={message.id} 
-                message={message.body} 
-                userId={data.room.user.id} 
-                messageOwnerId={message.user.id}
-                source={data.room.messages.length === id + 1 ? message.user.profilePic : null}/>
-        )
+    const conversation = data.room.messages.slice()
+        .sort( (a,b) =>  { return new Date(a.insertedAt) - new Date(b.insertedAt)})
+        .map( (message, id) => {
+            return (
+                <MessageBox key={message.id} 
+                    message={message.body} 
+                    userId={data.room.user.id} 
+                    messageOwnerId={message.user.id}
+                    source={data.room.messages.length === id + 1 ? message.user.profilePic : null}/>
+            )
     })
 
     const sendMessage = () => {
-        addMessage( { variables: { roomId: "93d14fbd-dfc7-410b-b063-052c89fdd24f", body: text}});
+        addMessage( { variables: { roomId: roomId, body: text}});
         setText('');
     }
 

@@ -37,6 +37,7 @@ export const GET_CHAT_DATA = gql`
 export const ADD_MESSAGE = gql`
   mutation ($body:String, $roomId: String) {
     sendMessage(body: $body, roomId: $roomId) {
+      insertedAt
       id
       body
     }
