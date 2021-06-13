@@ -127,11 +127,11 @@ const styles = StyleSheet.create( {
         fontFamily: 'Poppins_400Regular'
     },
     chatBox: {
-        display: "flex",
         height: "100%",
         paddingBottom: 80,
         paddingTop: 137,
-        justifyContent: "flex-end"
+        flexDirection: 'row',
+        alignItems: "flex-end"
     },
     buttonBox: {
         display: 'flex',
