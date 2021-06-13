@@ -17,7 +17,6 @@ const UsersRooms = ({navigation}) => {
     }
     else {
         const rooms = data.usersRooms.rooms;
-
         innerContent = (
             <View style={styles.usersRooms}>
                 {rooms.map(room => {
