@@ -27,11 +27,10 @@ const httpLink = createHttpLink( {
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = Cookies.get("token");
   return {
     headers: {
       ...headers,
-      authorization: token? `Bearer ${token1}` : '',
+      authorization: `Bearer ${token1}`,
     }
   }
 });
@@ -40,12 +39,8 @@ const authedHttpLink = authLink.concat(httpLink);
 
 const phoenixSocket = new PhoenixSocket("wss://chat.thewidlarzgroup.com/socket", {
   params: () => {
-    if (Cookies.get("token")) {
-      return { token: Cookies.get("token") };
-    } else {
       return {token: token1};
     }
-  }
 });
 
 const absintheSocket = AbsintheSocket.create(phoenixSocket);
