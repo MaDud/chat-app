@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { StyleSheet, Pressable, View, TextInput, Image, Text } from 'react-native';
-import {GET_CHAT_DATA} from '../index';
-import {useQuery} from '@apollo/client';
+import {GET_CHAT_DATA, ADD_MESSAGE} from '../index';
+import {useQuery, useMutation} from '@apollo/client';
 import Header from './Header';
 import MessageBox from './MessageBox';
 import { Phone, Videocall, Send} from './Svgs';
@@ -12,6 +12,7 @@ const ChatRoom = () => {
         variables: {id: "93d14fbd-dfc7-410b-b063-052c89fdd24f"}
     });
     const [text, setText] = useState('hej');
+    const [addMessage] = useMutation(ADD_MESSAGE)
 
     if (loading) {
         return <Text>Loading...</Text>
@@ -26,6 +27,12 @@ const ChatRoom = () => {
                 source={data.room.messages.length === id + 1 ? message.user.profilePic : null}/>
         )
     })
+
+    const sendMessage = () => {
+        addMessage( { variables: { roomId: "93d14fbd-dfc7-410b-b063-052c89fdd24f", body: text}});
+        console.log('send');
+        setText('');
+    }
 
     return (
         <View>
@@ -55,7 +62,7 @@ const ChatRoom = () => {
                     defaultValue={text}
                     onChangeText={text => setText(text)}
                 />
-                <Pressable onPressIn={()=> console.log(text)} style={styles.send}>
+                <Pressable onPressIn={()=> sendMessage()}>
                     <Send />
                 </Pressable>
             </View>
