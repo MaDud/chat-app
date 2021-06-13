@@ -50,8 +50,8 @@ export default function App() {
         <StatusBar style="auto" />
         <NavigationContainer>
           <Stack.Navigator initialRouteName="UsersRooms">
-            <Stack.Screen name="UsersRooms" component={UsersRooms} />
-            <Stack.Screen name="ChatRoom" component={ChatRoom} />
+            <Stack.Screen name="UsersRooms" component={UsersRooms} options={{headerShown: false}}/>
+            <Stack.Screen name="ChatRoom" component={ChatRoom} options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>
       </View>
