@@ -9,7 +9,7 @@ import Button from './Button';
 
 const ChatRoom = () => {
     const {loading, data} = useQuery(GET_CHAT_DATA, {
-        variables: {id: "5a7a2352-c9e5-46ec-ba3c-f1e45be0f569"}
+        variables: {id: "93d14fbd-dfc7-410b-b063-052c89fdd24f"}
     });
     const [text, setText] = useState('hej');
 
