@@ -23,7 +23,10 @@ const UsersRooms = ({navigation}) => {
         innerContent = (
             <View style={styles.usersRooms}>
                 {rooms.map(room => {
-                    return <Room key={room.id} name={room.name} source={room.roomPic} openChat={() => navigation.navigate('ChatRoom')}/>
+                    return <Room key={room.id} 
+                        name={room.name} 
+                        source={room.roomPic} 
+                        openChat={() => navigation.navigate('ChatRoom', {roomId: room.id})}/>
                 })}
             </View>
         )

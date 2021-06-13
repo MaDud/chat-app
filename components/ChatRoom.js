@@ -7,13 +7,14 @@ import MessageBox from './MessageBox';
 import { Phone, Videocall, Send} from './Svgs';
 import Button from './Button';
 
-const ChatRoom = () => {
+const ChatRoom = ({route}) => {
+    const { roomId } = route.params;
     const {loading, data} = useQuery(GET_CHAT_DATA, {
-        variables: {id: "93d14fbd-dfc7-410b-b063-052c89fdd24f"}
+        variables: {id: roomId}
     });
     const [text, setText] = useState('');
     const [addMessage] = useMutation(ADD_MESSAGE, {
-        refetchQueries: [ {query: GET_CHAT_DATA, variables: {id: "93d14fbd-dfc7-410b-b063-052c89fdd24f"}}]
+        refetchQueries: [ {query: GET_CHAT_DATA, variables: {id: roomId}}]
     })
 
     if (loading) {
