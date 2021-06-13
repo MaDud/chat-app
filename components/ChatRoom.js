@@ -4,7 +4,7 @@ import {GET_CHAT_DATA, ADD_MESSAGE} from '../index';
 import {useQuery, useMutation} from '@apollo/client';
 import Header from './Header';
 import MessageBox from './MessageBox';
-import { Phone, Videocall, Send} from './Svgs';
+import { Phone, Videocall, Send, Profile} from './Svgs';
 import Button from './Button';
 
 const ChatRoom = ({route}) => {
@@ -34,6 +34,10 @@ const ChatRoom = ({route}) => {
             )
     })
 
+    const chatPic = data.room.messages.find( message => {
+        return message.user.id !== data.room.user.id
+    });
+
     const sendMessage = () => {
         addMessage( { variables: { roomId: roomId, body: text}});
         setText('');
@@ -43,7 +47,13 @@ const ChatRoom = ({route}) => {
         <View>
             <Header>
                 <View style={styles.chatHeader}>
-                    <Image source={{uri: `${data.room.roomPic}`}} style={styles.chatIcon}/>
+                    <View>
+                        {
+                            chatPic.user.profilePic ? 
+                            <Image source={{uri: `${chatPic.user.profilePic}`}} style={styles.chatIcon}/>
+                            : <Profile />
+                        }
+                    </View>
                     <View style={styles.chatInfo}>
                         <Text style={styles.chatTitle}>{data.room.name}</Text>
                         <Text></Text>
