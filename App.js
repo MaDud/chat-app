@@ -4,9 +4,14 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  createHttpLink
+  createHttpLink,
+  split
 } from "@apollo/client";
+import { getMainDefinition } from '@apollo/client/utilities';
 import { setContext } from '@apollo/client/link/context';
+import * as AbsintheSocket from "@absinthe/socket";
+import { createAbsintheSocketLink } from "@absinthe/socket-apollo-link";
+import { Socket as PhoenixSocket } from "phoenix";
 import { StyleSheet, View } from 'react-native';
 import {useFonts, Poppins_400Regular} from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
@@ -22,16 +27,45 @@ const httpLink = createHttpLink( {
 });
 
 const authLink = setContext((_, { headers }) => {
+  const token = Cookies.get("token");
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${token1}`,
+      authorization: token? `Bearer ${token1}` : '',
     }
   }
 });
 
+const authedHttpLink = authLink.concat(httpLink);
+
+const phoenixSocket = new PhoenixSocket("wss://chat.thewidlarzgroup.com/socket", {
+  params: () => {
+    if (Cookies.get("token")) {
+      return { token: Cookies.get("token") };
+    } else {
+      return {token: token1};
+    }
+  }
+});
+
+const absintheSocket = AbsintheSocket.create(phoenixSocket);
+
+const websocketLink = createAbsintheSocketLink(absintheSocket);
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  websocketLink,
+  authedHttpLink
+);
+
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: splitLink,
   cache: new InMemoryCache()
 });
 
