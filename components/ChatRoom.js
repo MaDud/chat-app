@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, Pressable, View, TextInput, Image, Text } from 'react-native';
+import { StyleSheet, Pressable, View, TextInput, Image, Text, ScrollView} from 'react-native';
 import {GET_CHAT_DATA, ADD_MESSAGE} from '../index';
 import {useQuery, useMutation} from '@apollo/client';
 import Header from './Header';
@@ -55,7 +55,9 @@ const ChatRoom = () => {
                 </View>
             </Header>
             <View style={styles.chatBox}>
-                {conversation}
+                <ScrollView>
+                    {conversation}
+                </ScrollView>
             </View>
             <View style={styles.newMessageBox}>
                 <TextInput

@@ -12,6 +12,8 @@ import {useFonts, Poppins_400Regular} from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
 import UsersRooms from './components/UsersRooms';
 import ChatRoom from './components/ChatRoom';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const token1 = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2MjQ1Mzg4NTQsImlhdCI6MTYyMjExOTY1NCwiaXNzIjoiY2hhdGx5IiwianRpIjoiZTBlODM3NDgtODkxZS00ZmQyLWFmNjUtYmE5MjlhYmUzOWUwIiwibmJmIjoxNjIyMTE5NjUzLCJzdWIiOiI0ODU2ODVmMS1mNGQxLTQzOWYtYWE3MC0zYjg1ZWI4NjZmZTkiLCJ0eXAiOiJhY2Nlc3MifQ.JQy40M5jYX0ZRuEeItXUsHrHwEyJHXzSXdGi1hV6HHax9FJB9D2FjqX3fBzteUkLApFtHOcGVwUADpFp-tbUfw"
 
@@ -33,6 +35,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
+const Stack = createStackNavigator();
 
 export default function App() {
 
@@ -45,8 +48,12 @@ export default function App() {
     <ApolloProvider client={client}>
       <View style={styles.container}>
         <StatusBar style="auto" />
-        {/* <UsersRooms /> */}
-        <ChatRoom />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="UsersRooms">
+            <Stack.Screen name="UsersRooms" component={UsersRooms} />
+            <Stack.Screen name="ChatRoom" component={ChatRoom} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </View>
     </ApolloProvider>
   );

@@ -6,8 +6,10 @@ import {GET_USERS_ROOMS} from '../index';
 import {useQuery} from '@apollo/client';
 import Button from './Button';
 import { Search, Rooms } from './Svgs';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const UsersRooms = () => {
+const UsersRooms = ({navigation}) => {
 
     const { loading, data } = useQuery(GET_USERS_ROOMS);
 
@@ -21,7 +23,7 @@ const UsersRooms = () => {
         innerContent = (
             <View style={styles.usersRooms}>
                 {rooms.map(room => {
-                    return <Room key={room.id} name={room.name} source={room.roomPic}/>
+                    return <Room key={room.id} name={room.name} source={room.roomPic} openChat={() => navigation.navigate('ChatRoom')}/>
                 })}
             </View>
         )
