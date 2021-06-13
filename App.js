@@ -12,6 +12,7 @@ import { setContext } from '@apollo/client/link/context';
 import * as AbsintheSocket from "@absinthe/socket";
 import { createAbsintheSocketLink } from "@absinthe/socket-apollo-link";
 import { Socket as PhoenixSocket } from "phoenix";
+import Cookies from "js-cookie";
 import { StyleSheet, View } from 'react-native';
 import {useFonts, Poppins_400Regular} from '@expo-google-fonts/poppins';
 import AppLoading from 'expo-app-loading';
@@ -20,17 +21,18 @@ import ChatRoom from './components/ChatRoom';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const token1 = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2MjQ1Mzg4NTQsImlhdCI6MTYyMjExOTY1NCwiaXNzIjoiY2hhdGx5IiwianRpIjoiZTBlODM3NDgtODkxZS00ZmQyLWFmNjUtYmE5MjlhYmUzOWUwIiwibmJmIjoxNjIyMTE5NjUzLCJzdWIiOiI0ODU2ODVmMS1mNGQxLTQzOWYtYWE3MC0zYjg1ZWI4NjZmZTkiLCJ0eXAiOiJhY2Nlc3MifQ.JQy40M5jYX0ZRuEeItXUsHrHwEyJHXzSXdGi1hV6HHax9FJB9D2FjqX3fBzteUkLApFtHOcGVwUADpFp-tbUfw"
+const myToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJjaGF0bHkiLCJleHAiOjE2MjQ1Mzg4NTQsImlhdCI6MTYyMjExOTY1NCwiaXNzIjoiY2hhdGx5IiwianRpIjoiZTBlODM3NDgtODkxZS00ZmQyLWFmNjUtYmE5MjlhYmUzOWUwIiwibmJmIjoxNjIyMTE5NjUzLCJzdWIiOiI0ODU2ODVmMS1mNGQxLTQzOWYtYWE3MC0zYjg1ZWI4NjZmZTkiLCJ0eXAiOiJhY2Nlc3MifQ.JQy40M5jYX0ZRuEeItXUsHrHwEyJHXzSXdGi1hV6HHax9FJB9D2FjqX3fBzteUkLApFtHOcGVwUADpFp-tbUfw"
 
 const httpLink = createHttpLink( {
   uri: 'https://chat.thewidlarzgroup.com/api/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {
+  const token = Cookies.get("token");
   return {
     headers: {
       ...headers,
-      authorization: `Bearer ${token1}`,
+      authorization: token ? "" : `Bearer ${myToken}`,
     }
   }
 });
@@ -39,8 +41,12 @@ const authedHttpLink = authLink.concat(httpLink);
 
 const phoenixSocket = new PhoenixSocket("wss://chat.thewidlarzgroup.com/socket", {
   params: () => {
-      return {token: token1};
+    if (Cookies.get("token")) {
+      return { token: Cookies.get("token") };
+    } else {
+      return {token: myToken};
     }
+  }
 });
 
 const absintheSocket = AbsintheSocket.create(phoenixSocket);
