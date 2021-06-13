@@ -23,7 +23,7 @@ const ChatRoom = ({route}) => {
     } 
 
     const conversation = data.room.messages.slice()
-        .sort( (a,b) =>  { return a.insertedAt > b.insertedAt})
+        .sort( (a,b) =>  { return a.insertedAt > b.insertedAt ? 1: -1})
         .map( (message, id) => {
             return (
                 <MessageBox key={message.id} 
