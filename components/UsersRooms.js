@@ -6,6 +6,7 @@ import {GET_USERS_ROOMS} from '../index';
 import {useQuery} from '@apollo/client';
 import Button from './Button';
 import { Search, Rooms } from './Svgs';
+import AppLoading from 'expo-app-loading';
 
 const UsersRooms = ({navigation}) => {
 
@@ -13,7 +14,7 @@ const UsersRooms = ({navigation}) => {
 
     let innerContent;
     if (loading) {
-        innerContent = <Text>Loading...</Text>
+        innerContent = <AppLoading />
     }
     else {
         const rooms = data.usersRooms.rooms;

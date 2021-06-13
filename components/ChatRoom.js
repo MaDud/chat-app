@@ -6,6 +6,7 @@ import Header from './Header';
 import MessageBox from './MessageBox';
 import { Phone, Videocall, Send, Profile} from './Svgs';
 import Button from './Button';
+import AppLoading from 'expo-app-loading';
 
 const ChatRoom = ({route}) => {
     const { roomId } = route.params;
@@ -19,7 +20,7 @@ const ChatRoom = ({route}) => {
     })
 
     if (loading) {
-        return <Text>Loading...</Text>
+        return <AppLoading />
     } 
 
     const conversation = data.room.messages.slice()
